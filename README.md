@@ -7,7 +7,7 @@ https://www.electronjs.org/docs
 LTS version of node.js recommended
 
 For development
-> jshint to keep code in same style and standarts
+* **jshint** to keep code in same style and standarts
 
 # Installation
 `npm install`
