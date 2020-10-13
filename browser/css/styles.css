@@ -16,7 +16,7 @@ body {
   display: grid;
   grid-template-columns: 0.8fr 2.2fr;
   grid-template-rows: 1fr 1fr;
-  gap: 2.5em 10em;
+  gap: 2.5em 10%;
   grid-template-areas:
     "upload preview"
     "download preview";
@@ -66,7 +66,7 @@ body {
 }
 
 nav {
-  padding: 0 6em;
+  padding: 0 10%;
 }
 
 nav ul {
