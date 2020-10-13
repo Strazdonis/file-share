@@ -1,21 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>File share</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" /> -->
+    <link rel="stylesheet" type="text/css" href="browser/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="browser/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Hello World!</h1>
-    We are using node
-    <script>document.write(process.versions.node)</script>,
-    Chrome
-    <script>document.write(process.versions.chrome)</script>,
-    and Electron
-    <script>document.write(process.versions.electron)</script>.
+    <nav>
+        <ul>
+            <li id="logo" style="float:left">File transfer</li>
+           
+            <li><a href="#about">Contact</a></li>
+            <li><a href="#contact">Help</a></li>
+            <li><a href="#news">About</a></li>
+            <li class="active"><a href="#home">Home</a></li>
+            
+        </ul>
+    </nav>
+    <div class="grid-container">
+        <div class="card upload">
+            <p class="upload_text">Upload files</p> <!-- replace with a progress bar once uploading? -->
+            <div class="protect_checkbox_parent">
+                <input type="checkbox" id="preview_checkbox">
+                <label for="preview_checkbox">Protect?</label>
+            </div>
+
+
+        </div>
+        <div class="card download">
+            <div class="download_text">
+                Download file
+                <input type="text" class="file_url" placeholder="ID or URL">
+            </div>
+
+        </div>
+        <div class="card preview">
+            <p class="preview_text">Preview</span>
+
+        </div>
+    </div>
+    <script src="main.js"></script>
 </body>
 
 </html>
