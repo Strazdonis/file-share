@@ -36,7 +36,6 @@
   "author": "LEGENDS",
   "license": "ISC",
   "dependencies": {
-    "bit-converter": "^1.0.0",
     "register-protocol-win32": "^1.1.0"
   },
   "devDependencies": {
