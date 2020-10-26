@@ -9,13 +9,14 @@
     <link rel="stylesheet" type="text/css" href="browser/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="browser/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/browser/css/styles.css">
 </head>
 
 <body>
     <nav>
         <ul>
-            <li id="logo" style="float:left"><a href="fileshare://completed">FILE TRANSFER</a></li>
-           
+            <li id="logo" style="float:left" ><a href="fileshare://completed">FILE TRANSFER</a></li>
+            <img  id="sync-img" src="sync.svg" alt="sync-img" >
             <li><a href="#about">Contact</a></li>
             <li><a href="#contact">Help</a></li>
             <li><a href="#news">About</a></li>
@@ -25,6 +26,7 @@
     </nav>
     <div class="grid-container">
         <div class="card upload">
+            <img id="upload-img" src="upload.svg" alt="upload-img">
             <p class="upload_text">Upload files</p> <!-- replace with a progress bar once uploading? -->
             <div class="protect_checkbox_parent">
                 <input type="checkbox" id="preview_checkbox">
@@ -34,6 +36,7 @@
 
         </div>
         <div class="card download">
+            <img id="download-img" src="down-arrow.svg" alt="dowload-image">
             <div class="download_text">
                 Download file
                 <input type="text" class="file_url" placeholder="ID or URL">

@@ -33,11 +33,19 @@ body {
   font-size: 1.5em;
 }
 
-.preview_text, .upload_text, .download_text {
+.preview_text  {
   font-size: 2em;
   margin: 0;
   position: absolute;
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.upload_text, .download_text {
+  font-size: 2em;
+  margin: 0;
+  position: absolute;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -96,4 +104,21 @@ nav li a:hover:not(.active) {
 
 nav li.active a {
   border-bottom: 2px solid black;
+}
+
+/* Images */
+#upload-img {
+  height: 70px;
+  margin-top: 30%;
+}
+
+#download-img {
+  height: 70px;
+  margin-top: 22%;
+}
+
+#sync-img {
+  height: 60px;
+  float:left;
+  margin-top: 15px;
 }
