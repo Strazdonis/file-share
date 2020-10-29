@@ -1,4 +1,4 @@
-const { app, BrowserWindow, protocol } = require('electron');
+const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 const PROTOCOL_PREFIX = "fileshare";
 
 var proto = require('register-protocol-win32');
@@ -24,6 +24,7 @@ proto.exists(PROTOCOL_PREFIX)
         console.log("ERROR CHECKING IF PROTOCOL EXISTS", err);
     });
 
+
 console.log(process.argv);
 function createWindow() {
     console.log("createwindow called");
@@ -32,10 +33,15 @@ function createWindow() {
         height: 900,
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        show: false //don't show at first
     });
 
     win.loadFile('index.html');
+
+    win.once('ready-to-show', () => {
+        win.show(); //one ready - show
+    });
 
     //      ONLY WORKS IN-APP, WHEN APP IS LAUNCHED.
     //     protocol.registerHttpProtocol(PROTOCOL_PREFIX, (req, cb) => {
@@ -46,6 +52,26 @@ function createWindow() {
 
     // win.webContents.openDevTools();
 }
+
+ipcMain.on('show-open-dialog', (event, arg) => {
+
+    const options = {
+        title: 'Open a file or folder',
+        buttonLabel: 'Upload',
+        /*filters: [
+          { name: 'xml', extensions: ['xml'] }
+        ],*/
+        properties: ['showHiddenFiles'],
+        //message: 'This message will only be shown on macOS'
+    };
+
+    dialog.showOpenDialog(null, options, (filePaths) => {
+        
+    }).then(filePaths => {
+        event.sender.send('open-dialog-paths-selected', filePaths);
+    });
+});
+
 
 app.whenReady().then(createWindow);
 
@@ -60,3 +86,5 @@ app.on('activate', () => {
         createWindow();
     }
 });
+
+

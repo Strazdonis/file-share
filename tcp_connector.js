@@ -110,7 +110,7 @@ async function sendFile(client) {
 
 }
 
-var client = new net.Socket();
+var client = new net.Socket({readable: true, writable: true});
 async function init() {
     let ip = await askQuestion(`Enter Server IP Address (or enter "a" to connect to "127.0.0.1:55755"):`);
     if (ip === "a") {
@@ -124,6 +124,10 @@ async function init() {
 
     client.on('data', function (data) {
         console.log('Received: ' + data);
+    });
+
+    client.on('message', function (data) {
+        console.log("MESSAGE", data);
     });
 
     client.on('close', function () {
