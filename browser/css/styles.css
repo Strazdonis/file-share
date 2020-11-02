@@ -5,7 +5,7 @@ body {
 }
 
 .card {
-  border: 3px solid black;
+  border: 2px solid black;
   border-radius: 10px;
   position: relative;
   text-align: center;
@@ -76,6 +76,7 @@ body {
 #logo { 
   font-size: 2.5em;
   padding: 10px;
+  left:0px;
   font-weight: bold;
 }
 
@@ -136,3 +137,23 @@ nav li.active a {
 .orange{
   color:#F7B93B;
 }
+.help-position{
+  position: absolute;
+  top:20%;
+  left: 45%;
+  background-color:yellow;
+}
+.help-text{
+  font-size: 50px;
+  letter-spacing: 1px; 
+  text-align: center;
+  margin-top: 0%;
+}
+.problem-text{
+  font-size: 20px;
+  text-align: center;
+
+}
+
+
+
