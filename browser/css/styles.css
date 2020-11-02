@@ -22,6 +22,7 @@ body {
     "download preview";
   height: calc(100% - 150px);
 }
+
 .upload {
   grid-area: upload;
 }
@@ -48,6 +49,10 @@ body {
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.upload_text:hover{
+  font-size: 2.1em;
 }
 
 .protect_checkbox_parent {
@@ -109,18 +114,24 @@ nav li.active a {
 /* Images */
 #upload-img {
   height: 70px;
-  margin-top: 30%;
+  margin-top: 15%;
 }
+
+#upload-img:hover {
+  height: 73px;
+}
+
 
 #download-img {
   height: 70px;
-  margin-top: 22%;
+  margin-top: 8%;
 }
 
 #sync-img {
-  height: 60px;
+  height: 50px;
   float:left;
-  margin-top: 15px;
+  margin-top: 20px;
+  margin-left: -15px;
 }
 .orange{
   color:#F7B93B;
