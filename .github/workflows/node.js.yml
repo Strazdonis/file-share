@@ -11,6 +11,8 @@ jobs:
   check-quality:
     runs-on: ubuntu-latest
     name: A job to check my code quality
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Check code meets quality standards
         id: code-inspector
@@ -30,7 +32,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     strategy:
       matrix:
         node-version: [14.x]
@@ -41,6 +44,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
       - run: npm ci
       - run: npm run dist --if-present
       - run: npm test --if-present
