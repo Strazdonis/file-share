@@ -11,6 +11,8 @@ jobs:
   check-quality:
     runs-on: ubuntu-latest
     name: A job to check my code quality
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Check code meets quality standards
         id: code-inspector
@@ -43,8 +45,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run dist --if-present
-      - with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.github_token }}
       - run: npm test --if-present
