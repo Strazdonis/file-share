@@ -114,3 +114,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# files for testing
+small.txt
+big.txt
+medium.txt
+
+# Workflow file
+.github/
