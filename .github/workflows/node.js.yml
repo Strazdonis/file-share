@@ -43,6 +43,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run dist --if-present
-      - env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
+      - with:
+          # GitHub token, automatically provided to the action
+          # (No need to define this secret in the repo settings)
+          github_token: ${{ secrets.github_token }}
       - run: npm test --if-present
