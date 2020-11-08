@@ -141,19 +141,33 @@ nav li.active a {
   position: absolute;
   top:20%;
   left: 45%;
-  background-color:yellow;
+  
 }
 .help-text{
-  font-size: 50px;
-  letter-spacing: 1px; 
+  font-size: 55px; 
   text-align: center;
+  font-family: "Montserrat", sans-serif;
   margin-top: 0%;
 }
 .problem-text{
-  font-size: 20px;
-  text-align: center;
-
+    text-align: center;
+    font-size: 15px;
 }
+
+.about-position{
+  position: absolute;
+  top:20%;
+  left: 40%;
+}
+.qa-position{
+  
+   font-size: 35px; 
+   position: absolute;
+   top: 40%;
+   left:12%;
+}
+
+
 
 
 
