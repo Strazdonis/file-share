@@ -142,13 +142,6 @@ nav li.active a {
   top: 20%;
   left: 45%;
 }
-.help-text {
-  font-size: 55px;
-  text-align: center;
-  font-family: "Montserrat", sans-serif;
-  margin-top: 7%;
-  padding: 0;
-}
 
 .about-container p {
   text-transform: uppercase;
@@ -172,3 +165,100 @@ nav li.active a {
   top: 40%;
   left: 12%;
 }
+
+/*-------- Help page --------------*/
+
+#faq {
+  display: flex;
+
+  /* align-items: center; */
+  justify-content: center;
+  margin-top: 1%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#faq .add {
+  /*Add is the name for the plus icon*/
+  display: block;
+}
+
+#faq .remove {
+  /*Remove is the name for the less icon*/
+  display: none;
+}
+
+#faq i {
+  font-size: 30px;
+}
+
+/*Accordion container and each item*/
+.accordion h1 {
+  font-size: 55px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+
+  padding: 0;
+  font-weight: bold;
+}
+
+.accordion {
+  max-width: 800px;
+
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.accordion-item {
+  background-color: transparent;
+  border-bottom: 3px solid #daa520;
+
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+/*Styles for the question*/
+
+.accordion-title {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-around;
+
+  color: black;
+  font-size: 18px;
+  font-family: Open Sans;
+  font-weight: 600;
+
+  width: 100%;
+  padding: 1rem 0;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+
+.accordion-title:hover {
+  color: #daa520;
+}
+
+.accordion-title h2 {
+  width: 80%;
+}
+
+/*Styles for the answer*/
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  background-color: #daa520;
+  transition: max-height 0.6s;
+  font-family: Open Sans;
+  font-weight: 400;
+}
+
+.accordion-content p {
+  padding: 20px;
+  color: white;
+}
+
+/*--------------------------------------------------  */
