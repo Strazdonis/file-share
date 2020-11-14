@@ -155,16 +155,41 @@ nav li.active a {
 
 .about-position {
   position: absolute;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-top: 5%;
   text-align: center;
+  width: 100%;
+
+  padding: 0;
 }
+.help-text {
+  font-size: 55px;
+  font-family: "Montserrat", sans-serif;
+}
+
 .qa-position {
   font-size: 35px;
   position: absolute;
   top: 40%;
   left: 12%;
 }
+
+.about-position img {
+  margin-top: 2%;
+  max-width: 100%;
+  min-width: 400px;
+  height: auto;
+}
+/* 5 paragraphs in about.html */
+#first,
+#second,
+#third,
+#forth,
+#fifth {
+  float: left;
+  margin-right: 1%;
+  width: 19%;
+}
+/*---------------------------*/
 
 /*-------- Help page --------------*/
 
