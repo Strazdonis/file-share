@@ -185,15 +185,6 @@ nav li.active a {
   left: 11%;
 }
 
-#first,
-#second,
-#third,
-#forth,
-#fifth {
-  float: left;
-  width: 18%;
-}
-
 /*---------------------------*/
 
 /*-------- Help page --------------*/
@@ -295,6 +286,28 @@ nav li.active a {
   height: 75%;
   width: 75%;
 }
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  justify-content: space-around;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
 
 /*--------------------------------------------------  */
 
