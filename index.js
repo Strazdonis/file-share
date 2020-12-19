@@ -1,7 +1,8 @@
 const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 const PROTOCOL_PREFIX = "fileshare";
-
+const fs = require('fs');
 var proto = require('register-protocol-win32');
+const FileType = require('file-type');
 
 // ONLY WORKS IN WINDOWS
 /**
@@ -66,9 +67,27 @@ ipcMain.on('show-open-dialog', (event, arg) => {
     };
 
     dialog.showOpenDialog(null, options, (filePaths) => {
+
+    }).then(async filePaths => {
+        if (filePaths.canceled) {
+            return;
+        }
         
-    }).then(filePaths => {
-        event.sender.send('open-dialog-paths-selected', filePaths);
+        
+        filePaths.fileType = await FileType.fromFile(filePaths.filePaths[0]);
+        const encoding = filePaths.fileType === undefined ? "utf8" : '';
+        console.log(filePaths.fileType, encoding);
+        fs.readFile(filePaths.filePaths[0], encoding, function (err, data) {
+            if (err) {
+                filePaths.error = err;
+                return event.sender.send('open-dialog-paths-selected', filePaths);
+            }
+            filePaths.content = data;
+            event.sender.send('open-dialog-paths-selected', filePaths);
+        });
+
+
+        // event.sender.send('open-dialog-paths-selected', filePaths);
     });
 });
 

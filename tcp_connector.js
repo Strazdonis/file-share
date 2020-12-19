@@ -117,7 +117,7 @@ async function init() {
         ip = "127.0.0.1:55755";
     }
     console.log("Attempting to connect...");
-    client.connect(55755, '127.0.0.1', function () {
+    client.connect(55755, ip, function () {
         console.log('Connected');
         sendFile(client);
     });
