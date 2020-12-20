@@ -55,7 +55,24 @@
 
         </div>
     </div>
+    	<!-- Settings -->
+    <div class="popup" id="popup-1">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="close-btn" onclick="togglePopup()">&times;</div>
+    <h1>Settings</h1>
+  	<form>
+  <label for="ip">IP address:</label><br>
+  <input type="text" id="ip" name="ip"><br>
+  <input type="submit" value="Submit">
+</form> 
+  </div>
+</div>
+
+<button onclick="togglePopup()">Settings</button>
+
     <script src="browser/js/main.js"></script>
+    <script src="browser/js/pop.js"></script>
 </body>
 
 </html>
