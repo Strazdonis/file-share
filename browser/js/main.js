@@ -8,6 +8,11 @@ document.getElementById("upload-card").addEventListener('click', e => {
 });
 
 
+// const el = document.createElement("div");
+// el.classList.add("preview_element");
+// document.getElementsByClassName('preview')[0].appendChild(el)
+
+
 //gauna informacija ateina kaip eventas
 ipcRenderer.on('open-dialog-paths-selected', (event, data) => {
     console.log(data);
@@ -17,9 +22,11 @@ ipcRenderer.on('open-dialog-paths-selected', (event, data) => {
         console.log(data.content);
         document.getElementsByClassName('preview')[0].innerHTML = data.content;
     }
-
     //image file (.png, .jpeg, .gif)
     else if (data.fileType.mime.includes("image")) {
         document.getElementsByClassName('preview')[0].style.background = `url("${path}")`;
     }
+
+
+    document.getElementById("submit_btn").style.display = "block";
 });

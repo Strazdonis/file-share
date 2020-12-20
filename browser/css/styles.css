@@ -25,6 +25,7 @@ body {
 
 .upload {
   grid-area: upload;
+  cursor: pointer;
 }
 .download {
   grid-area: download;
@@ -112,7 +113,7 @@ nav li a {
 }
 
 nav li a:hover:not(.active) {
-  color: #111;
+  color: #f7b93b;
 }
 
 nav li.active a {
@@ -460,20 +461,8 @@ input:focus {
   transform:translate(-50%,-50%) scale(1);
 }
 
-button {
-  position:absolute;
-  top:90%;
-  left:40%;
-  transform:translate(-50%,-50%);
-  padding:15px;
-  font-size:10px;
-  border:2px solid black;
-  border-radius: 20px;
-  color:black;
-  text-transform:uppercase;
-  font-weight:700;
-  background:#fff;
-}
-button:hover{
-  color:#f7b93b;
+@media only screen and (max-height: 850px) {
+  #upload-img, #download-img {
+    display: none;
+  }
 }
