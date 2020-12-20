@@ -314,6 +314,18 @@ nav li.active a {
   width: 100%;
 }
 
+
+#ip, #port {
+  margin: 5px;
+}
+
+#submit_btn {
+  background: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 /*--------------------------------------------------  */
 
 /* Contact Form */

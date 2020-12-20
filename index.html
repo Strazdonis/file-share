@@ -64,12 +64,12 @@
         <div class="content">
             <div class="close-btn" onclick="togglePopup()">&times;</div>
             <h1>Settings</h1>
-            <form>
+            <form id="popup_form">
                 <label for="ip">IP address:</label><br>
-                <input type="text" id="ip" name="ip"><br>
+                <input type="text" id="ip" required name="ip"><br>
                 <label for="ip">Port:</label><br>
-                <input type="text" id="port" name="port"><br>
-                <input type="submit" value="Submit">
+                <input type="text" id="port" required name="port"><br>
+                <input type="submit" id="submit_btn" value="Submit">
             </form>
         </div>
     </div>

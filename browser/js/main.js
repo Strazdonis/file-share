@@ -1,4 +1,13 @@
 const { ipcRenderer } = require('electron');
+const storage = window.localStorage;
+
+if (!storage.getItem('ip')) {
+    storage.setItem('ip', '206.189.58.160');
+}
+if(!storage.getItem('port')) {
+    storage.setItem('port', '55755');
+}
+
 
 //norint siust informacija is client i electron backend reikia naudoti ipcRenderer.send(event, data);
 // ipcRenderer.send('show-open-dialog');
