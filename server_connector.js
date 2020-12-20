@@ -1,21 +1,10 @@
 const net = require('net');
 const fs = require('fs');
-const readline = require('readline');
 
 const CHUNK_SIZE = 10000000, // 10MB
     buffer = Buffer.alloc(CHUNK_SIZE);
 
-function askQuestion(query) {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-    });
-
-    return new Promise(resolve => rl.question(query, ans => {
-        rl.close();
-        resolve(ans);
-    }));
-}
+var client = new net.Socket({readable: true, writable: true});
 
 function getFilesizeInBytes(filename) {
     var stats = fs.statSync(filename);
@@ -28,9 +17,7 @@ function encode(buf) {
     return Uint8Array.from(buf);
 }
 
-
-async function sendFile(client) {
-    const filePath = await askQuestion("File to send:");
+async function send(filePath) {
     let file_size = getFilesizeInBytes(filePath);
     console.log("FILE size:", file_size);
     file_size += 1; //add up for '255' in the beggining of first chunk
@@ -77,7 +64,6 @@ async function sendFile(client) {
 
                 let data;
                 if (nread < CHUNK_SIZE) {
-                    console.log("MAZIAU");
                     let slice = buffer.slice(0, nread-first_send); //subtract the added 1 (L:56)
                     
                     if(first_send) {
@@ -111,23 +97,12 @@ async function sendFile(client) {
 
 }
 
-var client = new net.Socket({readable: true, writable: true});
-async function init() {
-    let answer = await askQuestion(`Enter Server IP Address 
-(or enter "a" to connect to "127.0.0.1:55755" or "b" to connect to "206.189.58.160:55755"):`);
-console.log("ATSAKE", answer);
-    let ip, port = "55755";
-    if (answer === "a") {
-        ip = "127.0.0.1";
-    }  else if(answer === "b") {
-        ip = "206.189.58.160";
-    } else {
-        ip = answer.split[":"][0];
-        port = answer.split[":"][1] || "55755";
+function connect(ip, port, filePath) {
+    if(!ip || !port) {
+        throw new Error("server ip and port is required.");
     }
-    console.log("Attempting to connect...");
     client.connect(port, ip, function () {
-        sendFile(client);
+        send(filePath);
     });
 
     client.on('data', function (data) {
@@ -140,12 +115,15 @@ console.log("ATSAKE", answer);
 
     client.on('close', function () {
         console.log('Connection closed');
-        init();
     });
     
     client.on('error', function (err) {
         console.log('Connection threw an error', err);
     });
+    
 }
 
-init();
+module.exports = {
+    connect,
+    send
+};

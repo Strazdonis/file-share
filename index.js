@@ -3,6 +3,7 @@ const PROTOCOL_PREFIX = "fileshare";
 const fs = require('fs');
 var proto = require('register-protocol-win32');
 const FileType = require('file-type');
+const server = require('./server_connector');
 
 // ONLY WORKS IN WINDOWS
 /**
