@@ -29,10 +29,18 @@ function getFilesizeInBytes(filename) {
 }
 
 const START = new Uint8Array([11]);
+/**
+ * converts buffer to Uint8Array
+ * @param {Buffer} buf buffer that will be encoded
+ */
 function encode(buf) {
     return Uint8Array.from(buf);
 }
 
+/**
+ * Send file to server
+ * @param {String} filePath path of the file that needs to be uploaded
+ */
 async function upload(filePath) {
     let file_size = getFilesizeInBytes(filePath);
     console.log("FILE size:", file_size, "file_name", filePath);
@@ -131,7 +139,13 @@ async function upload(filePath) {
     });
 }
 
-function connect(ip, port, filePath) {
+/**
+ * Connect & upload file
+ * @param {String} ip - server IP (taken from localStorage)
+ * @param {String} port - server Port (taken from localStorage)
+ * @param {String} filePath - filePath of the file that needs to be uploaded
+ */
+function connect_upl(ip, port, filePath) {
     if (!ip || !port) {
         throw new Error("server ip and port is required.");
     }
@@ -182,6 +196,6 @@ function connect(ip, port, filePath) {
 }
 
 module.exports = {
-    connect,
+    connect_upl,
     upload
 };

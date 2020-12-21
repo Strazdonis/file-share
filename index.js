@@ -59,7 +59,7 @@ function createWindow() {
 
 ipcMain.on('upload', (event, arg) => {
     console.log(arg);
-    server.connect(arg.ip, arg.port, arg.filePath);
+    server.connect_upl(arg.ip, arg.port, arg.filePath);
 });
 
 ipcMain.on('fetch-content', (event, arg) => {
