@@ -323,7 +323,16 @@ function connect_dl(ip, port, id, filePass = null, event) {
                 receiving = false;
                 sent = true;
                 client.destroy();
+                return;
             }
+        } else if(arraysEqual([...data], finished_arr) || arraysEqual([...data], finished_arr_merged)) {
+            if(!sent) {
+                event.sender.send('downloaded-file', { extension, name: name_readable, content: full_file });
+                receiving = false;
+                sent = true;
+            }
+            client.destroy();
+            return;
         }
 
     });
