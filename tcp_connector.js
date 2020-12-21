@@ -23,9 +23,18 @@ function getFilesizeInBytes(filename) {
     return fileSizeInBytes;
 }
 
-const START = new Uint8Array([255]);
+const START = new Uint8Array([11]);
 function encode(buf) {
     return Uint8Array.from(buf);
+}
+
+function str2ab(str) {
+    var buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
+    var bufView = new Uint16Array(buf);
+    for (var i = 0, strLen = str.length; i < strLen; i++) {
+        bufView[i] = str.charCodeAt(i);
+    }
+    return buf;
 }
 
 
@@ -37,9 +46,8 @@ async function sendFile(client) {
     const chunk_amount = Math.trunc(file_size / 256);
     console.log("chunks:", chunk_amount);
 
-    const size = new Uint8Array(chunk_amount > 4 ? chunk_amount : 4);
-    size[0] = file_size % 256;
-    size[1] = chunk_amount;
+    const size = new Uint8Array(17);
+    size.set([10, 8,0,0,0,0,0,0,0, 0,0,0,0, 123,123,123,123], 0);
 
     console.log(size);
 
@@ -59,7 +67,7 @@ async function sendFile(client) {
                 if(first_send) {
                     nread +=1 ;
                 }
-                console.log("NR:", nread);
+              //  console.log("NR:", nread);
                 if (err) {
                     throw err;
                 }
@@ -77,7 +85,7 @@ async function sendFile(client) {
 
                 let data;
                 if (nread < CHUNK_SIZE) {
-                    console.log("MAZIAU");
+              //      console.log("MAZIAU");
                     let slice = buffer.slice(0, nread-first_send); //subtract the added 1 (L:56)
                     
                     if(first_send) {
@@ -91,7 +99,12 @@ async function sendFile(client) {
                 else {
                     data = encode(Buffer.concat([START, buffer]));
                 }
-                console.log("SENDING", data.join("."));
+                const encoded = new Uint8Array(str2ab("test"));
+                data = new Uint8Array(encoded.length + 1);
+                data.set([11]);
+                data.set(encoded, 1);
+                
+                console.log("SENDING", data);
                 
                 client.write(data, err => {
                     if (err) {

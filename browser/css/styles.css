@@ -314,16 +314,28 @@ nav li.active a {
   width: 100%;
 }
 
-
-#ip, #port {
+#ip,
+#port {
   margin: 5px;
 }
 
-#submit_btn {
+#submit_btn,
+#upload_btn {
   background: white;
   border: 2px solid black;
   border-radius: 5px;
   padding: 5px;
+}
+
+#upload_btn {
+  display: none;
+  float: left;
+  text-align: center;
+  font-size: 1.5em;
+  position: absolute;
+  right: 10%;
+  bottom: 3.5%;
+  cursor: pointer;
 }
 
 /*--------------------------------------------------  */
@@ -420,61 +432,61 @@ input:focus {
   resize: none;
 }
 
-
 /* pop up css */
 .popup .overlay {
-  position:fixed;
-  top:0px;
-  left:0px;
-  width:100vw;
-  height:100vh;
-  background:rgba(0,0,0,0.7);
-  z-index:1;
-  display:none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  display: none;
 }
 
 .popup .content {
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(0);
-  background:#fff;
-  width:500px;
-  height:250px;
-  z-index:2;
-  text-align:center;
-  padding:20px;
-  box-sizing:border-box;
-  font-family:"Open Sans",sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: #fff;
+  width: 500px;
+  height: 250px;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
 
 .popup .close-btn {
-  cursor:pointer;
-  position:absolute;
-  right:20px;
-  top:20px;
-  width:30px;
-  height:30px;
-  background:#222;
-  color:#fff;
-  font-size:25px;
-  font-weight:600;
-  line-height:30px;
-  text-align:center;
-  border-radius:50%;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  background: #222;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
 }
 
 .popup.active .overlay {
-  display:block;
+  display: block;
 }
 
 .popup.active .content {
-  transition:all 300ms ease-in-out;
-  transform:translate(-50%,-50%) scale(1);
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 @media only screen and (max-height: 850px) {
-  #upload-img, #download-img {
+  #upload-img,
+  #download-img {
     display: none;
   }
 }

@@ -55,6 +55,19 @@ function createWindow() {
     // win.webContents.openDevTools();
 }
 
+ipcMain.on('upload', (event, arg) => {
+    console.log(arg);
+    server.connect(arg.ip, arg.port, arg.filePath);
+});
+
+ipcMain.on('fetch-content', (event, arg) => {
+    fs.readFile(arg, 'utf-8', (err, data) => {
+        if (err) throw err;
+        console.log(data);
+        event.sender.send('file-content', data);
+    });
+});
+
 ipcMain.on('show-open-dialog', (event, arg) => {
 
     const options = {
@@ -73,8 +86,8 @@ ipcMain.on('show-open-dialog', (event, arg) => {
         if (filePaths.canceled) {
             return;
         }
-        
-        
+
+
         filePaths.fileType = await FileType.fromFile(filePaths.filePaths[0]);
         const encoding = filePaths.fileType === undefined ? "utf8" : '';
         console.log(filePaths.fileType, encoding);
