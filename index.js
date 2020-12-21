@@ -62,7 +62,9 @@ ipcMain.on('upload', (event, arg) => {
 
 ipcMain.on('fetch-content', (event, arg) => {
     fs.readFile(arg, 'utf-8', (err, data) => {
-        if (err) throw err;
+        if (err) {
+            throw err;
+        }
         console.log(data);
         event.sender.send('file-content', data);
     });
