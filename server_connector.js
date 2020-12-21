@@ -175,7 +175,7 @@ async function download(id, pass, client) {
         password_len = [0, 0, 0, 0];
     }
     const id_buf = Buffer.from(id, 'utf8');
-    const size = new Uint8Array(14 + password_len.length);
+    const size = new Uint8Array(14 + password_len.length + password.length);
     
     console.log(4, id_buf.length, password_len.length, password.length);
 
