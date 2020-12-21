@@ -8,27 +8,34 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" /> -->
     <link rel="stylesheet" type="text/css" href="browser/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="browser/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-</head>
 
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+</head>
 <body>
     <nav>
         <ul>
-            <li id="logo" style="float:left"><a href="fileshare://completed">FILE TRANSFER</a></li>
-           
-            <li><a href="#about">Contact</a></li>
-            <li><a href="#contact">Help</a></li>
-            <li><a href="#news">About</a></li>
-            <li class="active"><a href="#home">Home</a></li>
-            
+            <li id="logo" style="float:left"><a>FILE <span
+                        class="orange">TRANSFER</span></a></li>
+            <img id="sync-img" src="sync.svg" alt="sync-img">
+            <li><a href="#" onclick="togglePopup()">Settings</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="help.html">Help</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="active"><a href="index.html">Home</a></li>
+
         </ul>
     </nav>
     <div class="grid-container">
-        <div class="card upload">
-            <p class="upload_text">Upload files</p> <!-- replace with a progress bar once uploading? -->
+        <div class="card upload" id="upload-card">
+            <img id="upload-img" src="upload.svg" alt="upload-img">
+
+            <p class="upload_text">Upload file</p> <!-- replace with a progress bar once uploading? -->
             <div class="protect_checkbox_parent">
-                <input type="checkbox" id="preview_checkbox">
-                <label for="preview_checkbox">Protect?</label>
+                <label for="upl_pass">Password (optional)</label><br>
+                <input type="text" class="file_url" id="upl_pass" name="upl_pass"><br>
+                
             </div>
 
 
@@ -36,16 +43,42 @@
         <div class="card download">
             <div class="download_text">
                 Download file
-                <input type="text" class="file_url" placeholder="ID or URL">
+                <form id="download_form">
+                    <input type="text" class="file_url" id="dl_id" placeholder="ID" required>
+                    <label>Optional</label>
+                    <input type="text" class="file_url" id="dl_pass" placeholder="Password">
+                    <button type="submit">Download</button>
+                </form>
             </div>
 
         </div>
-        <div class="card preview">
-            <p class="preview_text">Preview</span>
+        <div class="card preview" style="overflow: auto;">
+            <p class="preview_text"></p>
 
         </div>
+        <div id="upload_btn">
+            Upload file
+        </div>
     </div>
-    <script src="main.js"></script>
+    <!-- Settings -->
+    <div class="popup" id="popup-1">
+        <div class="overlay"></div>
+        <div class="content">
+            <div class="close-btn" onclick="togglePopup()">&times;</div>
+            <h1>Settings</h1>
+            <form id="popup_form">
+                <label for="ip">IP address:</label><br>
+                <input type="text" id="ip" required name="ip"><br>
+                <label for="ip">Port:</label><br>
+                <input type="text" id="port" required name="port"><br>
+                <input type="submit" id="submit_btn" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="browser/js/main.js"></script>
+    <script src="browser/js/pop.js"></script>
 </body>
 
 </html>

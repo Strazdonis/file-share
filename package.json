@@ -36,6 +36,7 @@
   "author": "LEGENDS",
   "license": "ISC",
   "dependencies": {
+    "file-type": "^16.0.1",
     "register-protocol-win32": "^1.1.0"
   },
   "devDependencies": {

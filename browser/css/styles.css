@@ -5,7 +5,7 @@ body {
 }
 
 .card {
-  border: 3px solid black;
+  border: 2px solid black;
   border-radius: 10px;
   position: relative;
   text-align: center;
@@ -22,8 +22,10 @@ body {
     "download preview";
   height: calc(100% - 150px);
 }
+
 .upload {
   grid-area: upload;
+  cursor: pointer;
 }
 .download {
   grid-area: download;
@@ -31,15 +33,54 @@ body {
 .preview {
   grid-area: preview;
   font-size: 1.5em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
 }
 
-.preview_text, .upload_text, .download_text {
+.preview_text {
   font-size: 2em;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.upload_text,
+.download_text {
+  font-size: 2em;
+  margin: 0;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.download_text {
+  top: 50%;
+}
+
+#download_form button {
+  margin-top: 20px;
+  background: none;
+  border: 2px solid black;
+  border-radius: 6px;
+  color:rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+#download_form button:hover {
+  border: 2px solid #f7b93b;
+  color:black;
+}
+
+input:focus {
+  border: 2px solid #f7b93b;
+}
+
+.download_text label {
+  font-size: 0.75em;
+  float: left;
+  margin: 5px 0 -5px 5px;
 }
 
 .protect_checkbox_parent {
@@ -53,16 +94,21 @@ body {
   border-radius: 10px;
   padding: 5px;
   margin-top: 5%;
-  width: 100%;
+  width: 90%;
+}
+
+.file_url:focus {
+  outline:none;
 }
 
 .file_url::-moz-placeholder {
   text-align: center;
 }
 
-#logo { 
+#logo {
   font-size: 2.5em;
   padding: 10px;
+  left: 0px;
   font-weight: bold;
 }
 
@@ -91,9 +137,385 @@ nav li a {
 }
 
 nav li a:hover:not(.active) {
-  color: #111;
+  color: #f7b93b;
 }
 
 nav li.active a {
   border-bottom: 2px solid black;
+}
+
+/* Images */
+#upload-img {
+  height: 70px;
+  margin-top: 15%;
+}
+
+#upload-img:hover {
+  height: 73px;
+}
+
+#download-img {
+  height: 70px;
+  margin-top: 8%;
+}
+
+#sync-img {
+  height: 50px;
+  float: left;
+  margin-top: 20px;
+  margin-left: -15px;
+}
+.orange {
+  color: #f7b93b;
+}
+.help-position {
+  position: absolute;
+  top: 20%;
+  left: 45%;
+}
+
+.about-container p {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.problem-text {
+  text-align: center;
+  font-size: 15px;
+}
+
+.about-position {
+  position: absolute;
+  margin-top: 5%;
+  text-align: center;
+  width: 100%;
+
+  padding: 0;
+}
+.help-text {
+  font-size: 55px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.qa-position {
+  font-size: 35px;
+  position: absolute;
+  top: 40%;
+  left: 12%;
+}
+
+.about-position img {
+  margin-top: 2%;
+  max-width: 100%;
+  min-width: 400px;
+  height: auto;
+}
+/* 5 paragraphs in about.html */
+#about-paragraphs {
+  position: absolute;
+  left: 11%;
+}
+
+/*---------------------------*/
+
+/*-------- Help page --------------*/
+
+#faq {
+  display: flex;
+
+  /* align-items: center; */
+  justify-content: center;
+  margin-top: 1%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#faq .add {
+  /*Add is the name for the plus icon*/
+  display: block;
+}
+
+#faq .remove {
+  /*Remove is the name for the less icon*/
+  display: none;
+}
+
+#faq i {
+  font-size: 30px;
+}
+
+/*Accordion container and each item*/
+.accordion h1 {
+  font-size: 55px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+
+  padding: 0;
+  font-weight: bold;
+}
+
+.accordion {
+  max-width: 800px;
+
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.accordion-item {
+  background-color: transparent;
+  border-bottom: 3px solid #daa520;
+
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+/*Styles for the question*/
+
+.accordion-title {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-around;
+
+  color: black;
+  font-size: 18px;
+  font-family: " Montserrat", Open Sans;
+  font-weight: 600;
+
+  width: 100%;
+  padding: 1rem 0;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+
+.accordion-title:hover {
+  color: #daa520;
+}
+
+.accordion-title h2 {
+  width: 80%;
+}
+
+/*Styles for the answer*/
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  background-color: #daa520;
+  transition: max-height 0.6s;
+  font-family: "Montserrat", Open Sans;
+  font-weight: 400;
+}
+
+.accordion-content p {
+  padding: 20px;
+  color: white;
+}
+
+.svg-about {
+  height: 75%;
+  width: 75%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  justify-content: space-around;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 35%;
+  padding: 0 4px;
+  margin: 0 35px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  max-width: 40%;
+}
+
+#ip,
+#port {
+  margin: 5px;
+}
+
+#submit_btn,
+#upload_btn {
+  background: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#upload_btn {
+  display: none;
+  float: left;
+  text-align: center;
+  font-size: 1.5em;
+  position: absolute;
+  right: 10%;
+  bottom: 3.5%;
+  cursor: pointer;
+}
+
+/*--------------------------------------------------  */
+
+/* Contact Form */
+.hidden {
+  display: none;
+}
+#section3 {
+  padding: 30px;
+  background-color: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#contactForm {
+  font-family: "Karla", "Arial", sans-serif;
+}
+.form-wrapper .field-list {
+  line-height: normal;
+}
+.form-wrapper .field-list .field {
+  position: relative;
+  margin: 0 0 24px;
+}
+.form-wrapper .field-list .fields {
+  margin: 0 0 0 -2%;
+}
+.form-wrapper .field-list .fields .title,
+.form-wrapper .field-list .fields .description,
+.form-wrapper .field-list .fields .field,
+.form-wrapper .field-list .fields .field-error {
+  margin-left: 2%;
+}
+.form-wrapper .field-list .fields .field {
+  float: left;
+}
+.form-wrapper .field-list .fields.name .field {
+  width: 48%;
+}
+.form-wrapper .field-list .field .field-element {
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0 4px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  font-family: sans-serif;
+  font-size: 12px;
+  line-height: normal;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+.form-wrapper .field-list .field .caption {
+  font-size: 12px;
+}
+fieldset {
+  border: none;
+}
+.form-wrapper .field-list legend {
+  display: none;
+}
+input:focus {
+  background-color: #fff !important;
+  cursor: auto;
+}
+.form-button-wrapper {
+  text-align: center;
+}
+.form-button-wrapper input.button {
+  background-color: #202020;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Karla", "Arial", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  border: none;
+  padding: 1em 2.5em;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+}
+.form-button-wrapper input.button:hover {
+  cursor: pointer;
+}
+.form-button-wrapper input.button:focus {
+  background-color: #202020 !important;
+  opacity: 0.85;
+}
+
+.title {
+  float: left;
+  font-size: 20px;
+}
+#textarea--field {
+  resize: none;
+}
+
+/* pop up css */
+.popup .overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  display: none;
+}
+
+.popup .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: #fff;
+  width: 500px;
+  height: 250px;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+.popup .close-btn {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  background: #222;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.popup.active .overlay {
+  display: block;
+}
+
+.popup.active .content {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media only screen and (max-height: 850px) {
+  #upload-img,
+  #download-img {
+    display: none;
+  }
+  .file_url {
+    width: 90%;
+  }
 }

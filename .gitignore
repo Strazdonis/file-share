@@ -115,6 +115,12 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+
+# file uplaod testing purposes
+small.txt
+big.txt
+medium.txt
+=======
 # files for testing
 small.txt
 big.txt
