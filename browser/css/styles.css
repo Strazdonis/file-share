@@ -33,6 +33,9 @@ body {
 .preview {
   grid-area: preview;
   font-size: 1.5em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
 }
 
 .preview_text {
@@ -52,15 +55,32 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.download_text {
+  top: 50%;
+}
+
+#download_form button {
+  margin-top: 20px;
+  background: none;
+  border: 2px solid black;
+  border-radius: 6px;
+  color:rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+#download_form button:hover {
+  border: 2px solid #f7b93b;
+  color:black;
+}
+
+input:focus {
+  border: 2px solid #f7b93b;
+}
 
 .download_text label {
   font-size: 0.75em;
   float: left;
   margin: 5px 0 -5px 5px;
-}
-
-.upload_text:hover {
-  font-size: 2.1em;
 }
 
 .protect_checkbox_parent {
@@ -74,7 +94,11 @@ body {
   border-radius: 10px;
   padding: 5px;
   margin-top: 5%;
-  width: 100%;
+  width: 90%;
+}
+
+.file_url:focus {
+  outline:none;
 }
 
 .file_url::-moz-placeholder {
@@ -490,5 +514,8 @@ input:focus {
   #upload-img,
   #download-img {
     display: none;
+  }
+  .file_url {
+    width: 90%;
   }
 }

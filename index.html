@@ -31,9 +31,9 @@
         <div class="card upload" id="upload-card">
             <img id="upload-img" src="upload.svg" alt="upload-img">
 
-            <p class="upload_text">Upload files</p> <!-- replace with a progress bar once uploading? -->
+            <p class="upload_text">Upload file</p> <!-- replace with a progress bar once uploading? -->
             <div class="protect_checkbox_parent">
-                <label for="upl_pass">Password</label><br>
+                <label for="upl_pass">Password (optional)</label><br>
                 <input type="text" class="file_url" id="upl_pass" name="upl_pass"><br>
                 
             </div>
@@ -41,7 +41,6 @@
 
         </div>
         <div class="card download">
-            <img id="download-img" src="down-arrow.svg" alt="dowload-image">
             <div class="download_text">
                 Download file
                 <form id="download_form">
@@ -53,8 +52,8 @@
             </div>
 
         </div>
-        <div class="card preview" style="overflow: scroll;">
-            <p class="preview_text">Preview</p>
+        <div class="card preview" style="overflow: auto;">
+            <p class="preview_text"></p>
 
         </div>
         <div id="upload_btn">

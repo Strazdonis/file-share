@@ -50,6 +50,15 @@ ipcRenderer.on('file-content', (event, data) => {
     previewParent.innerHTML = data;
 });
 
+ipcRenderer.on('uploaded-file', (event,data) => {
+    swal({
+        title: "Uploaded",
+        text: `File ID: ${data.id}`,
+        icon: "success",
+    });
+    document.getElementsByClassName('preview')[0].innerHTML = `<p class="preview_text">File ID: ${data.id}</p>`;
+});
+
 ipcRenderer.on('error', (event, data) => {
     swal({
         title: "Error",
@@ -74,7 +83,7 @@ function processFile(filePath, fileType, content) {
     const mime = fileType?.mime || fileType;
     const previewParent = document.getElementsByClassName('preview')[0];
     previewParent.innerHTML = "";
-    previewParent.style.background = ``;
+    previewParent.style['background-image'] = ``;
     //most likely a .txt file, they don't have a "type"
     if (fileType == undefined || mime.includes("text")) {
         if (content) {
@@ -87,7 +96,7 @@ function processFile(filePath, fileType, content) {
     }
     //image file (.png, .jpeg, .gif)
     else if (mime.includes("image")) {
-        previewParent.style.background = `url("${path}")`;
+        previewParent.style['background-image'] = `url("${path}")`;
     }
 
 
@@ -95,6 +104,8 @@ function processFile(filePath, fileType, content) {
     upload_btn.style.display = "block";
 
     upload_btn.addEventListener('click', ev => {
+        previewParent.innerHTML = "";
+        previewParent.style['background-image'] = ``;
         const filePass = document.getElementById("upl_pass").value || null;
         ipcRenderer.send('upload',
             { filePath: path, filePass, content, ip: localStorage.getItem('ip'), port: localStorage.getItem('port') }

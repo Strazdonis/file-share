@@ -225,7 +225,7 @@ function connect_upl(ip, port, filePath, filePass, event) {
             state.confirm = true;
         } else if (arraysEqual(arr, reject_array)) {
             console.log("REJECTED");
-        } else {
+        } else if(arr.length >= 5) {
             //sometimes the data gets added up to one chunk ([120,97,75,81,106] gets [10] added at the front.)
             if (arr[0] == 10) {
                 state.confirm = true;
@@ -235,6 +235,8 @@ function connect_upl(ip, port, filePath, filePass, event) {
                 state.id = data.toString();
             }
 
+        } else if(arr[0] == 11) {
+            event.sender.send('uploaded-file', {id: state.id});
         }
         console.log('Received: ' + data, arr);
         console.log(state);
