@@ -8,15 +8,11 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" /> -->
     <link rel="stylesheet" type="text/css" href="browser/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="browser/css/styles.css">
+
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 </head>
-<!--
-
-    PAŽIŪRĖKIT browser/js/main.js
-
--->
-
 <body>
     <nav>
         <ul>
@@ -37,8 +33,9 @@
 
             <p class="upload_text">Upload files</p> <!-- replace with a progress bar once uploading? -->
             <div class="protect_checkbox_parent">
-                <input type="checkbox" id="preview_checkbox">
-                <label for="preview_checkbox">Protect?</label>
+                <label for="upl_pass">Password</label><br>
+                <input type="text" class="file_url" id="upl_pass" name="upl_pass"><br>
+                
             </div>
 
 
@@ -47,9 +44,12 @@
             <img id="download-img" src="down-arrow.svg" alt="dowload-image">
             <div class="download_text">
                 Download file
-                <input type="text" class="file_url" placeholder="ID or URL">
-                <label>Optional</label>
-                <input type="text" class="file_url" placeholder="Password">
+                <form id="download_form">
+                    <input type="text" class="file_url" id="dl_id" placeholder="ID" required>
+                    <label>Optional</label>
+                    <input type="text" class="file_url" id="dl_pass" placeholder="Password">
+                    <button type="submit">Download</button>
+                </form>
             </div>
 
         </div>
@@ -77,8 +77,7 @@
         </div>
     </div>
 
-
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="browser/js/main.js"></script>
     <script src="browser/js/pop.js"></script>
 </body>

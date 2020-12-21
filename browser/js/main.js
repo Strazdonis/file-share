@@ -1,6 +1,5 @@
 const { ipcRenderer } = require('electron');
 const storage = window.localStorage;
-
 if (!storage.getItem('ip')) {
     storage.setItem('ip', '206.189.58.160');
 }
@@ -12,10 +11,34 @@ if (!storage.getItem('port')) {
 //norint siust informacija is client i electron backend reikia naudoti ipcRenderer.send(event, data);
 // ipcRenderer.send('show-open-dialog');
 
+document.getElementById("upl_pass").addEventListener('click', e => {
+    e.stopPropagation();
+});
+
 document.getElementById("upload-card").addEventListener('click', e => {
+    e.stopPropagation();
     ipcRenderer.send('show-open-dialog');
 });
 
+document.getElementById("download_form").addEventListener('submit', e => {
+    e.preventDefault();
+    const id = document.getElementById("dl_id").value;
+    const pass = document.getElementById("dl_pass").value || null;
+    if (id.length != 5) {
+        swal({
+            title: "Error",
+            text: "ID must be 5 characters long!",
+            icon: "error",
+        });
+        return;
+    }
+    ipcRenderer.send('download', {
+        ip: localStorage.getItem('ip'),
+        port: localStorage.getItem('port'),
+        id: id,
+        pass: pass,
+    });
+});
 
 // const el = document.createElement("div");
 // el.classList.add("preview_element");
@@ -27,8 +50,27 @@ ipcRenderer.on('file-content', (event, data) => {
     previewParent.innerHTML = data;
 });
 
+ipcRenderer.on('error', (event, data) => {
+    swal({
+        title: "Error",
+        text: data.message,
+        icon: "error",
+    });
+    return;
+});
+
+ipcRenderer.on('downloaded-file', (event, data) => {
+    console.log(data);
+    ipcRenderer.send('save-file', {
+        extension: data.extension,
+        fileName: data.name,
+        content: data.content,
+    });
+});
+
 function processFile(filePath, fileType, content) {
     const path = filePath.replaceAll("\\", "/");
+    /* jshint: ignoreline*/
     const mime = fileType?.mime || fileType;
     const previewParent = document.getElementsByClassName('preview')[0];
     previewParent.innerHTML = "";
@@ -51,9 +93,11 @@ function processFile(filePath, fileType, content) {
 
     const upload_btn = document.getElementById("upload_btn");
     upload_btn.style.display = "block";
+
     upload_btn.addEventListener('click', ev => {
+        const filePass = document.getElementById("upl_pass").value || null;
         ipcRenderer.send('upload',
-            { filePath: path, content, ip: localStorage.getItem('ip'), port: localStorage.getItem('port') }
+            { filePath: path, filePass, content, ip: localStorage.getItem('ip'), port: localStorage.getItem('port') }
         );
     });
 }
@@ -69,7 +113,9 @@ document.addEventListener('drop', (event) => {
     event.stopPropagation();
     const file = event.dataTransfer.files[0];
     console.log("Dropped file:", file);
-    if(file === undefined) return;
+    if (file === undefined) {
+        return;
+    }
     processFile(file.path, file.type, file.contents);
 
 });

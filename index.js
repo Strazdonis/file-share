@@ -1,6 +1,6 @@
 const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 const PROTOCOL_PREFIX = "fileshare";
-const fs = require('fs');
+const fs = require('fs-extra');
 var proto = require('register-protocol-win32');
 const FileType = require('file-type');
 const server = require('./server_connector');
@@ -38,8 +38,9 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true
         },
-        show: false //don't show at first
+        show: false, //don't show at first
     });
+    win.setMenuBarVisibility(false);
 
     win.loadFile('index.html');
 
@@ -59,7 +60,13 @@ function createWindow() {
 
 ipcMain.on('upload', (event, arg) => {
     console.log(arg);
-    server.connect_upl(arg.ip, arg.port, arg.filePath);
+    
+    server.connect_upl(arg.ip, arg.port, arg.filePath, arg.filePass, event);
+});
+
+ipcMain.on('download', (event, arg) => {
+    console.log(arg);
+    server.connect_dl(arg.ip, arg.port, arg.id, arg.pass, event);
 });
 
 ipcMain.on('fetch-content', (event, arg) => {
@@ -109,6 +116,37 @@ ipcMain.on('show-open-dialog', (event, arg) => {
     });
 });
 
+
+ipcMain.on('save-file', (event, arg) => {
+
+    const options = {
+        title: 'Save file',
+        buttonLabel: 'Save',
+        defaultPath : arg.fileName,
+        filters :[
+            {name: arg.extension, extensions: [arg.extension]},
+            {name: 'All Files', extensions: ['*']}
+        ]
+        //message: 'This message will only be shown on macOS'
+    };
+
+    dialog.showSaveDialog(null, options).then(filePath => {
+        if (filePath.canceled) {
+            return;
+        }
+        console.log(filePath);
+        const content_buf = Buffer.from(arg.content);
+        fs.outputFile(filePath.filePath, content_buf, err => {
+            console.log(err); // => null
+            if(!err) {
+                event.sender.send('saved-file', filePath);
+            } else {
+                throw err;
+            }
+        });
+        // event.sender.send('open-dialog-paths-selected', filePaths);
+    });
+});
 
 app.whenReady().then(createWindow);
 

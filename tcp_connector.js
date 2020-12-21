@@ -11,7 +11,7 @@ var state = {
     "confirm": false,
     "notif": false,
 };
-
+var client = new net.Socket({ readable: true, writable: true });
 const CHUNK_SIZE = 10000000, // 10MB
     buffer = Buffer.alloc(CHUNK_SIZE);
 
@@ -152,12 +152,38 @@ async function sendFile(client) {
 
 }
 
+/**
+ * Download file from server
+ * @param {String} id ID of the file that needs to be downloaded (LENGTH MUST BE 5)
+ * @param {String} pass password of the file (optional)
+ */
+async function download(id, pass) {
+    let pass_buf = [0,0,0,0];
+    if(pass != null) {
+        pass_buf = [...Buffer.from(pass, 'utf8')];
+    }
+    const id_buf = Buffer.from(id, 'utf8');
+    const size = new Uint8Array(10+pass_buf.length);
+    console.log("ID", id, [...id_buf]);
+    console.log("PASS", pass, pass_buf);
+    size.set(
+        [10+pass_buf.length - 4,  //upcoming packet size
+        0, 0, 0, 20, //Operand (download request)
+        ...id_buf, // file id
+        ...pass_buf], //name
+        0); //offset
+
+    console.log(size);
+    client.write(size);
+}
+
+
 function arraysEqual(a1, a2) {
     /* WARNING: arrays must not contain {objects} or behavior may be undefined */
     return JSON.stringify(a1) == JSON.stringify(a2);
 }
 
-var client = new net.Socket({ readable: true, writable: true });
+
 async function init() {
     let answer = await askQuestion(`Enter Server IP Address 
 (or enter "a" to connect to "127.0.0.1:55755" or "b" to connect to "206.189.58.160:55755"):`);
@@ -173,7 +199,7 @@ async function init() {
     }
     console.log("Attempting to connect...");
     client.connect(port, ip, function () {
-        sendFile(client);
+        download("Tj40B", null);
     });
 
     client.on('data', async function (data) {
