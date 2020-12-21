@@ -4,7 +4,7 @@
   "description": "A file sharing application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
@@ -30,7 +30,7 @@
       }
     ],
     "mac": {
-      "category": "public.app-category.Reference"
+      "category": "public.app-category.FileTransfer"
     }
   },
   "author": "LEGENDS",
